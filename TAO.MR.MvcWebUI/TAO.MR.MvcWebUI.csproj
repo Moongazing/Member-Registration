@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="bootstrap" Version="5.2.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TAO.MR.Business\TAO.MR.Business.csproj" />
+    <ProjectReference Include="..\TAO.MR.Entities\TAO.MR.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

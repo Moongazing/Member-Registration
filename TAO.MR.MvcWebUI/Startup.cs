@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TAO.MR.Business.ServiceAdapters;
 
 namespace TAO.MR.MvcWebUI
 {
@@ -24,6 +25,7 @@ namespace TAO.MR.MvcWebUI
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+    //  services.AddSingleton<IKpsService, KpsServiceAdapter>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

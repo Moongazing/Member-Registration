@@ -20,7 +20,7 @@ namespace TAO.MR.Business.DependencyResolvers.Autofac
       builder.RegisterType<MemberManager>().As<IMemberService>().SingleInstance();
       builder.RegisterType<EfMemberDal>().As<IMemberDal>().SingleInstance();
 
-      builder.RegisterType<IKpsService>().As<KpsServiceAdapter>().SingleInstance();
+      builder.RegisterType<KpsServiceAdapter>().As<IKpsService>().SingleInstance();
 
       var assembly = System.Reflection.Assembly.GetExecutingAssembly();
       builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
