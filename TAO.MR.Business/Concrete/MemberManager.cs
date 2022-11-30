@@ -9,6 +9,7 @@ using TAO.MR.Business.ValidationRules.FluentValidation;
 using TAO.MR.DataAccess.Abstract;
 using TAO.MR.Entities.Concrete;
 using TAO_Core.Aspects.Autofac.Validation;
+using TAO_Core.Utilities.Business;
 using TAO_Core.Utilities.Results;
 using TAO_Core.Utilities.Results.Concrete;
 
@@ -26,12 +27,25 @@ namespace TAO.MR.Business.Concrete
     [ValidationAspect(typeof(MemberValidatior))]
     public IResult Add(Member member)
     {
+      var result = BusinessRules.Run(CheckIfMemberExists(member));
+      if(result != null)
+      {
+        return result;
+      }
       if(_kpsService.ValidateUser(member) == false )
       {
         return new ErrorResult(Messages.MemberNotValid);
       }
       _memberDal.Add(member);
       return new SuccessResult(Messages.MemberAdded);
+    }
+    private IResult CheckIfMemberExists(Member member)
+    {
+      if(_memberDal.Get(m=>m.NationalIdentity == member.NationalIdentity) != null)
+      {
+        return new ErrorResult(Messages.MemberAlreadyExists);
+      }
+      return new SuccessResult();
     }
   }
 }
