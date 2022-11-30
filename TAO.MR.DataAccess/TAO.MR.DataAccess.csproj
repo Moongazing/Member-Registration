@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TAO.MR.Entities\TAO.MR.Entities.csproj" />
+    <ProjectReference Include="..\TAO_Core\TAO_Core.csproj" />
+  </ItemGroup>
+
+</Project>
