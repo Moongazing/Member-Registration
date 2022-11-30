@@ -27,15 +27,13 @@ namespace TAO.MR.Business.Concrete
     [ValidationAspect(typeof(MemberValidatior))]
     public IResult Add(Member member)
     {
-      var result = BusinessRules.Run(CheckIfMemberExists(member));
+      var result = BusinessRules.Run(CheckIfMemberExists(member),
+                                     CheckIfMemberValidFromKPS(member));
       if(result != null)
       {
         return result;
       }
-      if(_kpsService.ValidateUser(member) == false )
-      {
-        return new ErrorResult(Messages.MemberNotValid);
-      }
+      
       _memberDal.Add(member);
       return new SuccessResult(Messages.MemberAdded);
     }
@@ -44,6 +42,14 @@ namespace TAO.MR.Business.Concrete
       if(_memberDal.Get(m=>m.NationalIdentity == member.NationalIdentity) != null)
       {
         return new ErrorResult(Messages.MemberAlreadyExists);
+      }
+      return new SuccessResult();
+    }
+    private IResult CheckIfMemberValidFromKPS(Member member)
+    {
+      if (_kpsService.ValidateUser(member) == false)
+      {
+        return new ErrorResult(Messages.MemberNotValid);
       }
       return new SuccessResult();
     }
